@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        /* Styles for the custom modal */
+        #customModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            width: 60%; /* Adjust the width as needed */
+            max-width: 600px; /* Set a maximum width if necessary */
+            z-index: 1000;
+            border-radius: 8px;
+        }
+
+        #modalCloseBtn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        select {
+            width: 23%;
+            padding: 8px;
+            margin: 5px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body style="background-color: black;">
+    <div id="productContainer" class="d-flex flex-wrap justify-content-around" style="margin: 20px;">
+        <!-- JavaScript will generate product cards here -->
+    </div>
+
+    <!-- Custom Modal -->
+    <div id="customModal">
+        <span id="modalCloseBtn" onclick="closeModal()">&times;</span>
+        <h2>Product Details</h2>
+        <p>Product information goes here.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Attribute 1</td>
+                    <td>Value 1</td>
+                </tr>
+                <tr>
+                    <td>Attribute 2</td>
+                    <td>Value 2</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+        <label for="quantity">Quantity:</label>
+        <select id="quantity" name="quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <!-- Add more options as needed -->
+        </select>
+        <label for="size">Size:</label>
+        <select id="size" name="size">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+            <!-- Add more options as needed -->
+        </select>
+        <button onclick="closeModal()">Close</button>
+    </div>
+
+    <script>
+        const product = [
+            {
+                id: "1",
+                image: "./images/C10GS.jpg",
+                productName: "C10GS",
+                category: "iot",
+                subProd : [
+                    {
+                        prodName:"C10GS -A1",
+                        regionOfTesting:["APAC"],
+                        eSim:"YES",
+                        formFactors:[
+                            "M.2" ,
+                           " MiniPCI" ,
+                            "LGA"
+
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A2",
+                        regionOfTesting:["APAC"],
+                        eSim:"NO",
+                        formFactors:[
+                            "M.2" 
+
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A3",
+                        regionOfTesting:["APAC","NAM"],
+                        eSim:"YES",
+                        formFactors:[
+                            "M.2" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A4",
+                        regionOfTesting:["APAC","SAM"],
+                        eSim:"NO",
+                        formFactors:[
+                            "M.2" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A5",
+                        regionOfTesting:["SAM"],
+                        eSim:"NO",
+                        formFactors:[
+                            "MiniPCI" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A6",
+                        regionOfTesting:["GLOBAL"],
+                        eSim:"NO",
+                        formFactors:[
+                            "MiniPCI" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A7",
+                        regionOfTesting:["GLOBAL"],
+                        eSim:"NO",
+                        formFactors:[
+                            "LGA" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A8",
+                        regionOfTesting:["GLOBAL"],
+                        eSim:"YES",
+                        formFactors:[
+                            "LGA" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A9",
+                        regionOfTesting:["GLOBAL"],
+                        eSim:"YES",
+                        formFactors:[
+                            "MiniPCI","M.2 "
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A10",
+                        regionOfTesting:["NAM","SAM","EU","GLOBAL"],
+                        eSim:"YES",
+                        formFactors:[
+                        "M.2" , "MiniPCI" , "LGA"
+ 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C10GS -A11",
+                        regionOfTesting:["NAM","SAM","EU","GLOBAL"],
+                        eSim:"NO",
+                        formFactors:[
+                        "M.2" 
+                        ],
+                        price:"$35"
+                    },
+                    
+                    
+                ]
+            },
+            {
+                id: "2",
+                image: "./images/C16QS.jpg",
+                productName: "C16QS",
+                category: "cloud",
+                subProd: [
+                {
+                        prodName:"C16QS-A1",
+                        regionOfTesting:["SAM","EU","GLOBAL"],
+                        eSim:"NO",
+                        formFactors:[
+                            "LGA"
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A2",
+                        regionOfTesting:["GLOBAL"],
+                        eSim:"NO",
+                        formFactors:[
+                            "M.2","MiniPCI","LGA"
+
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A3",
+                        regionOfTesting:["GLOBAL"],
+                        eSim:"YES",
+                        formFactors:[
+                            "M.2" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A4",
+                        regionOfTesting:["GLOBAL"],
+                        eSim:"YES",
+                        formFactors:[
+                            "M.2" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A5",
+                        regionOfTesting:["GLOBAL"],
+                        eSim:"YES",
+                        formFactors:[
+                            "M.2" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A6",
+                        regionOfTesting:["GLOBAL"],
+                        eSim:"NO",
+                        formFactors:[
+                            "MiniPCI" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A7",
+                        regionOfTesting:["NAM"],
+                        eSim:"NO",
+                        formFactors:[
+                            "MiniPCI" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A2",
+                        regionOfTesting:["NAM"],
+                        eSim:"NO",
+                        formFactors:[
+                            "LGA"
+
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A3",
+                        regionOfTesting:["NAM"],
+                        eSim:"NO",
+                        formFactors:[
+                            "LGA" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A4",
+                        regionOfTesting:["SAM","EU"],
+                        eSim:"NO",
+                        formFactors:[
+                            "M.2","MiniPCI" 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A5",
+                        regionOfTesting:["SAM","EU"],
+                        eSim:"NO",
+                        formFactors:[
+                            "LGA", 
+                        ],
+                        price:"$35"
+                    },
+                    {
+                        prodName:"C16QS -A6",
+                        regionOfTesting:["SAM","EU"],
+                        eSim:"YES",
+                        formFactors:[
+                            "LGA" 
+                        ],
+                        price:"$35"
+                    },
+
+                
+                ],
+                
+            }
+        ];
+
+        function generateProductCard(product,index) {
+            return `
+                <div style="margin: 10px; width: 200px; display: inline-block;" class="card">
+                    <div class="bg-image hover-overlay" data-mdb-ripple-init data-mdb-ripple-color="light">
+                        <img src="${product.image}" class="img-fluid"
+                            style="width: 170px; height: 200px; margin-left: 13.5px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" />
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div style="color: bisque;" class="card-body">
+                        <h5 class="card-title">${product.productName}</h5>
+                        <p class="card-text">${product.category}</p>
+                        <!-- Pass the product ID to openModal function when the button is clicked -->
+                        <button type="button" class="btn btn-primary" onclick="openModal(${index})">
+                            ADD TO CART
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Get the product container element
+        const productContainer = document.getElementById('productContainer');
+
+        // Loop through products and append product cards to the container
+        // product.forEach(productItem => {
+        //     productContainer.innerHTML += generateProductCard(productItem);
+        // });
+        product.forEach((productItem, index) => {
+        productContainer.innerHTML += generateProductCard(productItem, index);
+    });
+
+        function openModal(product,index) {
+        const selectedProduct = product[index];
+        const subProducts = selectedProduct.subProd;
+
+        console.log(selectedProduct.productName, "title");
+        console.log(selectedProduct.image, "img");
+        console.log(selectedProduct.category, "catt");
+
+        subProducts.forEach((data) => {
+            console.log(data.prodName, "sub products...");
+        });
+            const modal = document.getElementById('customModal');
+            modal.style.display = 'block';
+            document.getElementById('customModal').innerHTML = `
+                <span id="modalCloseBtn" onclick="closeModal()">&times;</span>
+             
+                
+                <div class="dropdown-container">
+                    <label for="quantity">region of testing:</label>
+                    <label for="size">eSim:</label>
+                    <label for="size">formfactor:</label>
+                    <hr>
+                    <select id="region" name="region">
+                        <option >select</option>
+                        <option value="1">GLOBAL</option>
+                        <option value="2">EUROPE</option>
+                        <option value="3">APAC&JAPAN</option>
+                        <option value="4">N.AMERICA</option>
+                        <option value="5">S.AMERICA</option>
+                        <option value="6">AUS&NZ</option>
+                        <option value="7">MIDDLE EAST & AFRICA</option>
+
+                    </select>
+                    
+                    <select id="esim" name="esim">
+                        <option >select</option>
+                        <option value="yes">yes</option>
+                        <option value="no">no</option>
+                        
+                       
+                    </select>
+                    
+                    <select id="formfactors" name="formfactors">
+                        <option >select</option>
+                        <option value="m2">M.2</option>
+                        <option value="MiniPcle">MiniPCI </option>
+                        <option value="lga">LGA</option>
+                        
+                    </select>
+
+                    <button type="submit" class="btn btn-primary" style="width:3cm;height:1cm;"> reset </button>
+                </div>
+                
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Region</th>
+                            <th>eSIM</th>
+                            <th>Form factor</th>
+                            <th>Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Attribute 1</td>
+                            
+                        </tr>
+                        <tr>
+                            <td>Attribute 2</td>
+                            
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+
+                <button onclick="closeModal()">Close</button>
+            `;
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
